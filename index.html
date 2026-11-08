@@ -197,7 +197,7 @@
   .add-btns{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
   .add{font-family:inherit;font-size:.78rem;font-weight:700;border:1.5px solid var(--naranja);background:transparent;color:#ffd2ad;border-radius:50px;padding:4px 12px;cursor:pointer;transition:.2s;white-space:nowrap}
   .add:hover,.add.ok{background:var(--naranja);color:#fff}
-  .car-fab{position:fixed;right:22px;bottom:96px;z-index:61;background:var(--naranja);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-family:inherit;font-weight:700;font-size:.95rem;display:none;align-items:center;gap:10px;cursor:pointer;box-shadow:0 10px 25px rgba(232,131,58,.45);transition:.2s}
+  .car-fab{position:fixed;right:22px;bottom:22px;z-index:61;background:var(--naranja);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-family:inherit;font-weight:700;font-size:.95rem;display:none;align-items:center;gap:10px;cursor:pointer;box-shadow:0 10px 25px rgba(232,131,58,.45);transition:.2s}
   .car-fab.show{display:flex;animation:pop .35s}
   .car-fab:hover{background:var(--naranja-osc)}
   .car-fab .cnt{background:#fff;color:var(--naranja);border-radius:50px;min-width:24px;height:24px;display:grid;place-items:center;font-size:.8rem;padding:0 6px}
@@ -208,7 +208,8 @@
   .car-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--borde)}
   .car-head h3{font-size:1.25rem;font-weight:800}
   .car-x{background:var(--crema);border:none;width:38px;height:38px;border-radius:50%;font-size:1.3rem;cursor:pointer;color:var(--negro)}
-  .car-body{flex:1;overflow:auto;padding:12px 22px}
+  .car-body{flex:1 0 auto;padding:12px 22px}
+  .carrito{overflow-y:auto;overscroll-behavior:contain}
   .car-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed var(--borde)}
   .car-item .info{flex:1;min-width:0}
   .car-item b{display:block;font-size:.95rem;line-height:1.3}
@@ -230,6 +231,13 @@
   .car-foot textarea:focus{outline:none;border-color:var(--primario)}
   .car-links{display:flex;justify-content:space-between;margin-top:10px}
   .car-nota{font-size:.78rem;color:var(--gris);text-align:center;margin-top:10px}
+  .prep{display:flex;gap:10px;align-items:center;background:#eaf4ee;border:1px solid #cfe3d6;color:var(--primario-osc);border-radius:12px;padding:10px 14px;font-size:.86rem;font-weight:600;margin-bottom:14px}
+  .retiro{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .retiro button{font-family:inherit;font-size:.9rem;font-weight:600;border:1.5px solid var(--borde);background:#fff;color:var(--negro);border-radius:12px;padding:10px 8px;cursor:pointer;transition:.15s}
+  .retiro button small{display:block;font-weight:500;color:var(--gris);font-size:.75rem}
+  .retiro button.sel{border-color:var(--primario);background:#eaf4ee;color:var(--primario-osc)}
+  .retiro button.sel small{color:var(--primario-osc)}
+  .nota-prep{display:inline-flex;gap:8px;align-items:center;background:#2c3135;border:1px solid #394045;border-radius:50px;padding:8px 18px;color:#e9ecea;font-weight:600;font-size:.9rem;margin-bottom:26px}
 
   @media(max-width:900px){
     .lealtad,.hero-grid,.about{grid-template-columns:1fr}
@@ -263,7 +271,7 @@
       <li><a href="#nosotros">Nosotros</a></li>
       <li><a href="#visitanos">Visítanos</a></li>
     </ul>
-    <a class="btn" href="#" data-pedido="Hola La Casita, quiero hacer un pedido">Pedir ahora</a>
+    <a class="btn" href="#menu" data-armar>🛒 Armar pedido</a>
     <button class="menu-toggle" aria-label="Abrir menú" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
   </nav>
 </header>
@@ -278,7 +286,7 @@
       <p>Lápices, hamburguesas, empanadas, tacos, gallos y antojos hechos al momento, a precios de soda. Del cementerio de San Rafael, 150 metros este.</p>
       <div class="hero-btns">
         <a href="#menu" class="btn">Ver menú →</a>
-        <a href="#" class="btn outline" data-pedido="Hola La Casita, quiero hacer un pedido" data-txt-wa="💬 Pedir por WhatsApp" data-txt-tel="📞 Llamar para pedir">📞 Llamar para pedir</a>
+        <a href="#menu" class="btn outline" data-armar>🛒 Armar mi pedido</a>
       </div>
     </div>
     <div class="hero-img">
@@ -296,9 +304,10 @@
       <span class="script">Nuestro</span>
       <h2>Menú</h2>
     </div>
+    <div style="text-align:center"><span class="nota-prep">⏱️ Todo se prepara al momento · tiempo aprox. <span class="tPrep"></span></span></div>
     <div class="tabs" id="tabs"></div>
     <div class="grid-menu" id="grid"></div>
-    <p class="nota">🛒 Agregá productos y tocá <b>Ver pedido</b> para enviarlo por WhatsApp · Precios en colones, sujetos a cambio.</p>
+    <p class="nota">🛒 Agregá productos, tocá <b>Ver pedido</b> y elegí a qué hora pasás a retirarlo · Precios en colones, sujetos a cambio.</p>
   </div>
 </section>
 
@@ -407,9 +416,9 @@
       <div class="card">
         <div class="ic">📞</div>
         <h3>Pedidos</h3>
-        <p>Armá tu pedido en el menú y envialo por WhatsApp, o llamanos. Lo tenemos listo para cuando llegués.</p>
+        <p>Armá tu pedido en el menú, elegí a qué hora pasás y envialo por WhatsApp. O llamanos. Lo tenemos listo a la hora que indiqués.</p>
         <div id="telefonos"></div>
-        <a class="btn nar wa-only" href="#" data-wa="Hola La Casita, quiero hacer un pedido">💬 WhatsApp</a>
+        <a class="btn nar" href="#menu" data-armar>🛒 Armar mi pedido</a>
       </div>
     </div>
     <div class="mapa"><iframe id="mapaFrame" title="Mapa de Soda La Casita" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
@@ -427,7 +436,7 @@
   <div class="cta">
     <h2>¿Se te antojó? 🌭</h2>
     <p>Hacé tu pedido y pasá a recogerlo.</p>
-    <a class="btn" href="#" data-pedido="Hola La Casita, quiero hacer un pedido" data-txt-wa="💬 Hacer mi pedido" data-txt-tel="📞 Llamar para pedir">📞 Llamar para pedir</a>
+    <a class="btn" href="#menu" data-armar>🛒 Armar mi pedido</a>
   </div>
 </div>
 
@@ -446,6 +455,7 @@
   <div class="car-body" id="carLista"></div>
   <div class="car-foot" id="carFoot">
     <div id="paso1">
+      <div class="prep">⏱️ Todo se prepara al momento. Tiempo aprox.: <span class="tPrep"></span></div>
       <div class="car-total"><span>Total</span><span id="carTotal">₡0</span></div>
       <button class="btn" id="btnOrdenar">Ordenar →</button>
       <div class="car-links"><button class="link-sm" id="btnSeguir">← Seguir agregando</button><button class="link-sm" id="btnVaciar">Vaciar pedido</button></div>
@@ -453,16 +463,16 @@
     <div id="paso2" style="display:none">
       <div class="car-total"><span>Total</span><span id="carTotal2">₡0</span></div>
       <div class="campo"><label for="pNombre">¿A nombre de quién es el pedido?</label><input id="pNombre" placeholder="Ej: María Rodríguez" autocomplete="name" maxlength="60"></div>
+      <div class="campo"><label>¿A qué hora pasás a retirarlo?</label><div class="retiro" id="retiroOps"></div><input type="time" id="pHora" style="display:none;margin-top:8px"></div>
       <div class="campo"><label for="pNota">Nota para la cocina <span style="font-weight:400;color:var(--gris)">(opcional)</span></label><textarea id="pNota" placeholder="Ej: sin cebolla, salsa aparte…" maxlength="300"></textarea></div>
       <div class="msg" id="pMsg"></div>
       <a class="btn" id="btnEnviar" href="#" target="_blank" rel="noopener" style="background:#25D366">💬 Enviar pedido por WhatsApp</a>
       <div class="car-links"><button class="link-sm" id="btnVolver">← Volver al pedido</button></div>
-      <p class="car-nota">Se abre WhatsApp con tu pedido listo; solo tocá enviar.</p>
+      <p class="car-nota">Se abre WhatsApp con tu pedido y la hora de retiro; solo tocá enviar. Lo tenemos listo a esa hora, no hace falta que preguntés.</p>
     </div>
   </div>
 </aside>
 
-<a href="#" class="wa-float" id="flotante" data-pedido="Hola La Casita, quiero hacer un pedido" aria-label="Hacer pedido"></a>
 
 <script>
 /* =========================================================
@@ -473,6 +483,10 @@ const CONFIG = {
   // Si se deja vacío (""), los botones llaman por teléfono (el carrito necesita WhatsApp).
   whatsapp: "50688807252",
   telefonos: ["2551-1110", "2553-4059"],
+  // Pedidos por WhatsApp: el cliente elige a qué hora retira.
+  tiempoPrep: "20–30 min",     // se muestra en el menú y en el carrito
+  retiroOpciones: [30, 45, 60], // botones "En X min"
+  retiroMinimo: 30,             // minutos mínimos si elige una hora exacta
   direccion: "Del cementerio de San Rafael, 150 metros este. San Rafael de Oreamuno, Cartago, Costa Rica.",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Soda+La+Casita+San+Rafael+Oreamuno+Cartago",
   mapaEmbed: "https://www.google.com/maps?q=Soda+La+Casita,+San+Rafael,+Oreamuno,+Cartago,+Costa+Rica&output=embed",
@@ -585,21 +599,13 @@ document.getElementById("tabs").innerHTML = cats.map(c=>`<button class="tab" dat
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>pintarCategoria(t.dataset.cat));
 pintarCategoria(TODO);
 
-// Botones de pedido: WhatsApp si está configurado; si no, llamada.
-document.querySelectorAll("[data-pedido]").forEach(a=>{
-  a.href = pedidoLink(a.dataset.pedido);
-  if (tieneWA) { a.target="_blank"; a.rel="noopener"; }
-  const txt = tieneWA ? a.dataset.txtWa : a.dataset.txtTel;
-  if (txt) a.textContent = txt;
+// Botones "Armar pedido": llevan al menú (no abren un chat vacío).
+document.querySelectorAll("[data-armar]").forEach(a=>a.onclick=e=>{
+  e.preventDefault();
+  if (typeof cantCar === "function" && cantCar() > 0) abrirCar();
+  else document.getElementById("menu").scrollIntoView({behavior:"smooth"});
 });
-document.querySelectorAll("[data-wa]").forEach(a=>{a.href=waLink(a.dataset.wa);a.target="_blank";a.rel="noopener"});
-document.querySelectorAll(".wa-only").forEach(el=>el.style.display = tieneWA ? "" : "none");
-
-const flot = document.getElementById("flotante");
-flot.classList.toggle("llamar", !tieneWA);
-flot.innerHTML = tieneWA
-  ? '<svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.7-.2 1.2z"/></svg>'
-  : '<svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
+document.querySelectorAll(".tPrep").forEach(el=>el.textContent = CONFIG.tiempoPrep);
 
 document.getElementById("direccion").textContent = CONFIG.direccion;
 document.getElementById("maps").href = CONFIG.mapsUrl;
@@ -653,11 +659,36 @@ function paso(p){ $c("paso1").style.display = p===1?"":"none"; $c("paso2").style
 function abrirCar(){ $c("carrito").classList.add("show"); $c("carOverlay").classList.add("show"); }
 function cerrarCar(){ $c("carrito").classList.remove("show"); $c("carOverlay").classList.remove("show"); }
 
+/* --- hora de retiro --- */
+let retiroSel = null;   // número de minutos, o "hora"
+const fmtHora = d => d.toLocaleTimeString("es-CR", {hour:"numeric", minute:"2-digit", hour12:true}).replace(/\s+/g," ");
+function pintarRetiro(){
+  const ops = CONFIG.retiroOpciones.map(m=>`<button type="button" data-r="${m}" class="${retiroSel===m?"sel":""}">En ${m===60?"1 hora":m+" min"}<small>aprox. ${fmtHora(new Date(Date.now()+m*60000))}</small></button>`);
+  ops.push(`<button type="button" data-r="hora" class="${retiroSel==="hora"?"sel":""}">Elegir hora<small>más tarde hoy</small></button>`);
+  $c("retiroOps").innerHTML = ops.join("");
+  $c("retiroOps").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+    retiroSel = b.dataset.r === "hora" ? "hora" : +b.dataset.r;
+    $c("pHora").style.display = retiroSel === "hora" ? "" : "none";
+    if (retiroSel === "hora") { if (!$c("pHora").value) { const d=new Date(Date.now()+60*60000); $c("pHora").value = String(d.getHours()).padStart(2,"0")+":"+String(Math.ceil(d.getMinutes()/5)*5%60).padStart(2,"0"); } $c("pHora").focus(); }
+    $c("pMsg").textContent=""; pintarRetiro(); armarMensaje();
+  });
+}
+function horaRetiro(){   // devuelve {fecha, texto} o {error}
+  if (retiroSel === null) return {error:"Elegí a qué hora pasás a retirarlo."};
+  if (retiroSel !== "hora") { const f=new Date(Date.now()+retiroSel*60000); return {fecha:f, texto:`${fmtHora(f)} (en ${retiroSel===60?"1 hora":retiroSel+" min"})`}; }
+  const v = $c("pHora").value;
+  if (!v) return {error:"Escribí la hora a la que pasás."};
+  const [h,m] = v.split(":").map(Number); const f = new Date(); f.setHours(h,m,0,0);
+  if (f - Date.now() < CONFIG.retiroMinimo*60000) return {error:`Elegí una hora con al menos ${CONFIG.retiroMinimo} min de anticipación.`};
+  return {fecha:f, texto:fmtHora(f)};
+}
+
 function armarMensaje(){
   const nombre = $c("pNombre").value.trim().replace(/\s+/g," ");
   const nota = $c("pNota").value.trim();
   const lineas = carrito.map(i=>`• ${i.cant} x ${i.nombre} — ${colones(i.precio*i.cant)}`);
-  const msg = `Hola La Casita, quiero hacer un pedido 🛒\n\n*A nombre de:* ${nombre}\n\n${lineas.join("\n")}\n\n*Total: ${colones(totalCar())}*` + (nota ? `\n\n*Nota:* ${nota}` : "");
+  const r = horaRetiro();
+  const msg = `Hola La Casita, quiero hacer un pedido para retirar 🛒\n\n*A nombre de:* ${nombre}\n*Paso a retirarlo:* ${r.texto || "-"}\n\n${lineas.join("\n")}\n\n*Total: ${colones(totalCar())}*` + (nota ? `\n\n*Nota:* ${nota}` : "") + `\n\nNo hace falta confirmar, paso a la hora indicada. ¡Gracias!`;
   $c("btnEnviar").href = waLink(msg);
 }
 
@@ -666,9 +697,9 @@ $c("carCerrar").onclick = cerrarCar;
 $c("carOverlay").onclick = cerrarCar;
 $c("btnSeguir").onclick = () => { cerrarCar(); document.getElementById("menu").scrollIntoView({behavior:"smooth"}); };
 $c("btnVaciar").onclick = () => { carrito = []; guardarCar(); pintarCarrito(); };
-$c("btnOrdenar").onclick = () => { paso(2); $c("pMsg").textContent=""; setTimeout(()=>$c("pNombre").focus(),50); };
+$c("btnOrdenar").onclick = () => { paso(2); $c("pMsg").textContent=""; pintarRetiro(); armarMensaje(); setTimeout(()=>$c("pNombre").focus(),50); };
 $c("btnVolver").onclick = () => paso(1);
-["pNombre","pNota"].forEach(id=>$c(id).addEventListener("input", ()=>{ armarMensaje(); $c("pMsg").textContent=""; }));
+["pNombre","pNota","pHora"].forEach(id=>$c(id).addEventListener("input", ()=>{ armarMensaje(); $c("pMsg").textContent=""; }));
 $c("btnEnviar").onclick = e => {
   armarMensaje();
   if ($c("pNombre").value.trim().length < 2) {
@@ -676,10 +707,15 @@ $c("btnEnviar").onclick = e => {
     $c("pMsg").className = "msg err"; $c("pMsg").textContent = "Escribí a nombre de quién es el pedido.";
     $c("pNombre").focus(); return;
   }
+  const r = horaRetiro();
+  if (r.error) {
+    e.preventDefault();
+    $c("pMsg").className = "msg err"; $c("pMsg").textContent = r.error; return;
+  }
   try { localStorage.setItem("lacasita_nombre", $c("pNombre").value.trim()); } catch (err) {}
   setTimeout(() => {
-    carrito = []; guardarCar(); $c("pNota").value = ""; pintarCarrito(); cerrarCar();
-    avisar("¡Pedido listo! Terminá de enviarlo en WhatsApp.");
+    carrito = []; guardarCar(); $c("pNota").value = ""; retiroSel = null; $c("pHora").value = ""; $c("pHora").style.display = "none"; pintarCarrito(); cerrarCar();
+    avisar("¡Listo! Enviá el mensaje en WhatsApp y pasá a la hora indicada.");
   }, 600);
 };
 try { const nGuardado = localStorage.getItem("lacasita_nombre"); if (nGuardado) $c("pNombre").value = nGuardado; } catch (e) {}

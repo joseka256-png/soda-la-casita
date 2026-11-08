@@ -21,7 +21,7 @@ Panel del personal: https://joseka256-png.github.io/soda-la-casita/personal.html
 ## Pendientes antes de publicar
 
 En `index.html`, bloque `CONFIG`:
-- `whatsapp`: configurado en 8880-7252 (carrito de pedidos → WhatsApp).
+- `whatsapp`: 8880-7252. Pedidos solo desde el carrito: el cliente elige hora de retiro (`retiroOpciones`, `retiroMinimo`) y se muestra `tiempoPrep`. No hay botones de chat abierto.
 - `horario`: horario real.
 - `pagos`: confirmar formas de pago.
 
