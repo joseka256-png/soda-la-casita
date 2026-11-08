@@ -1,0 +1,7 @@
+{
+  "name": "lacasita-soporte",
+  "private": true,
+  "type": "module",
+  "description": "Herramientas de soporte (solo ISCR Tech) para la Tarjeta La Casita",
+  "dependencies": { "firebase-admin": "^12.0.0" }
+}
